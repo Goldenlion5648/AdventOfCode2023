@@ -306,6 +306,11 @@ def nums(a : str, negs=True):
     pattern = r"-?\d+" if negs else r"\d+"
     return [int(n) for n in re.findall(pattern, a.strip())]
 
+def single_nums(a : str, negs=True):
+    '''Returns a list with all the numbers from a string'''
+    pattern = r"-?\d" if negs else r"\d"
+    return [int(n) for n in re.findall(pattern, a.strip())]
+
 def num(a : str, negs=True):
     '''Returns the first number found in a'''
     pattern = r"-?\d+" if negs else r"\d+"
@@ -324,6 +329,10 @@ def char_range(start : str, stop : str):
     return [chr(i) for i in range(ord(start), ord(stop) + 1)]
 crange = char_range
 c_range = char_range
+
+def first_last(a):
+    '''gets the first and last value from a'''
+    return a[0], a[-1]
 
 def apply_while(f, a, condition):
     '''continuously applies f to a (list), as long as condition is true'''
