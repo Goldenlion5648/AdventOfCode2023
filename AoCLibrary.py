@@ -519,6 +519,7 @@ def rotate(board, times=1):
 rotate90=rotate
 rot=rotate
 
+
 def flip(board):
     '''flip a 2d list by 180 degrees over Y axis (left side becomes right)'''
     new = deepcopy(board)
@@ -869,6 +870,7 @@ split_into_n_groups=more_itertools.distribute
 split_up=chunked
 make_groups_size_n = chunked
 get_groups_size_n = chunked
+groups = chunked
 def first_repeat(a):
     '''returns the first element to be seen twice in a'''
     seen = set()
