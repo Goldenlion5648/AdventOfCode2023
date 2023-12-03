@@ -36,7 +36,7 @@ def main(a : str):
                         if temp != 0:
                             mult *= temp
                             seen += 1
-                    if seen > 1:
+                    if seen == 2:
                         ret += mult
         return ret
     
