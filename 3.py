@@ -15,9 +15,9 @@ def main(a : str):
             for x in range(len(board)):
                 if board[y][x].isdigit() :
                     if any(
-                            board[y + dy][x + dx] not in ".0987654321" for dy, dx in adj8
-                            if y + dy in range(len(board)) and 
-                            x + dx in range(len(board[0]))
+                            board[y + dy][x + dx] not in ".0987654321" 
+                            for dy, dx in adj8
+                            if in_bounds(board, y + dy, x + dx)
                     ):
                         cur =  expand(board, y, x)
                         ret += cur
@@ -29,15 +29,14 @@ def main(a : str):
         for y in range(len(board)):
             for x in range(len(board)):
                 if board[y][x] == '*':
-                    mult = 1
-                    seen = 0
+                    seen = []
                     for dy, dx in adj8:
                         temp = expand(board, dy + y, x + dx)
                         if temp != 0:
-                            mult *= temp
-                            seen += 1
-                    if seen == 2:
-                        ret += mult
+                            seen.append(temp)
+                    if len(seen) == 2:
+                        ret += prod(seen)
+                    used.clear()
         return ret
     
     return part1(), part2()
@@ -45,7 +44,7 @@ def main(a : str):
 def expand(board, y, x):
     i = 0
     ret = ''
-    if board[y][x] =='.':
+    if not in_bounds(board, y, x) or board[y][x] not in digits:
         return 0
     while x -i >= 0 and board[y][x-i].isdigit() :
         cur = (y, x - i)
@@ -60,6 +59,7 @@ def expand(board, y, x):
         if cur in used: 
             return 0
         ret += board[y][x+i]
+        used.add(cur)
         i += 1
     return int(ret)
 

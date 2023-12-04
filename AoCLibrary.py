@@ -1,5 +1,5 @@
 import re
-from string import ascii_lowercase as lowercase, ascii_uppercase as uppercase, ascii_letters as letters
+from string import ascii_lowercase as lowercase, ascii_uppercase as uppercase, ascii_letters as letters, digits
 import string
 all_letters = letters
 import string
@@ -249,6 +249,11 @@ Bounds = ibounds
 
 def bounded(number, lo, hi):
     return max(min(number, hi), lo)
+
+def in_bounds(board: list[list], y, x) -> bool:
+    '''returns True if (y, x) is in bounds of the board'''
+    return 0 <= y < len(board) and 0 <= x < len(board[y])
+
 
 def debug(*args, **kwargs):
     # print(sys.argv)
