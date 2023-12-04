@@ -6,9 +6,9 @@ def main(a : str):
     a = a.strip()
     inp = AdventInput(data=a)
     ret = 0
-    G = dd(list)
+    card_count_available = dd(int)
     for i in range(len(inp.lines)):
-        G[i+1].append(1)
+        card_count_available[i+1] += 1
     for n, line in enu(inp.lines, 1):
         line = line.split(":")[1]
         winning, other = line.split("|")
@@ -19,9 +19,9 @@ def main(a : str):
             cur = 2 ** (matching- 1)
             ret += cur
             for x in range(matching):
-                G[n+x+1].extend([1] * len(G[n]))
+                card_count_available[n+x+1] += card_count_available[n]
             
-    return (ret, sum(len(x) for x in G.values()))
+    return (ret, sum(card_count_available.values()))
 
 
 
@@ -36,8 +36,7 @@ Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11
 
 """.lstrip("\n")
 
-if samp and "r" not in sys.argv:
-    sample_answer = main(samp)
-    print("sample", sample_answer)
+sample_answer = main(samp)
+print("sample", sample_answer)
 
 ans(main(real_input))
