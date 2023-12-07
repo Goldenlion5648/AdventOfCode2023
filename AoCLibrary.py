@@ -845,6 +845,7 @@ def string(lis : list, sep=''):
         lis = reduce(lambda x, y: x + y, lis)
     return sep.join(list(map(str, lis)))
 str_list = string
+list_to_big_num =string
 def mult_dict_values(d, multiplier):
     '''multiplies all values in dictionary by multiplier'''
     return {x: d[x] * multiplier for x in d}
