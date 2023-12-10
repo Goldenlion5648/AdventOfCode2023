@@ -25,6 +25,7 @@ import hashlib
 import heapq
 from typing import NamedTuple, Type, List, Set
 from dataclasses import dataclass
+from enum import Enum
 # from numpy import sign
 # get_sign = sign
 # copysign = sign
@@ -82,6 +83,22 @@ directions = {
     2: (1, 0),
     3: (0, -1),
 }
+class Directions(Enum):
+    NORTH = (-1, 0)
+    SOUTH = (1, 0)
+    EAST = (0, 1)
+    WEST = (0, -1)
+    @staticmethod
+    def opposite(to_get_opposite_of):
+        opposite = {
+            Directions.NORTH : Directions.SOUTH,
+            Directions.EAST : Directions.WEST,
+            Directions.SOUTH : Directions.NORTH,
+            Directions.WEST : Directions.EAST,
+        }
+
+        return opposite[to_get_opposite_of]
+
 dirs = directions
 dir_rev = {
     (-1, 0): 0, 
@@ -252,6 +269,8 @@ def bounded(number, lo, hi):
 
 def in_bounds(board: list[list], y, x) -> bool:
     '''returns True if (y, x) is in bounds of the board'''
+    if isinstance(board, dict):
+        return (y, x) in board
     return 0 <= y < len(board) and 0 <= x < len(board[y])
 
 
@@ -358,11 +377,11 @@ def to_grid(a, as_dict=False):
 read_grid = to_grid
 grid = to_grid
 to_board = to_grid
-def to_dict(a):
+def to_dict(a, convert_numbers=True):
     '''converts 2D list to a dict of (y, x) -> value'''
     if isinstance(a, str):
         a = a.split("\n")
-    return {(y, x) : (int(a[y][x]) if a[y][x].isnumeric() else a[y][x]) for y in range(len(a)) for x in range(len(a[y]))}
+    return {(y, x) : (int(a[y][x]) if (convert_numbers and a[y][x].isnumeric()) else a[y][x]) for y in range(len(a)) for x in range(len(a[y]))}
 
 list_to_dict = to_dict
 
@@ -858,7 +877,7 @@ def least_common(a: str):
     
 
 
-def elementwise(a, b, operation):
+def elementwise(a, b, operation=op.add):
     '''
     a = [1, 2, 3]
     b = [10, 20, 30]
@@ -867,7 +886,11 @@ def elementwise(a, b, operation):
     '''
     return [operation(x, y) for x, y in zip(a, b)]
 
+def elementwise_tup(a, b, operation=op.add):
+    return tuple(element_wise(a, b, operation))
+
 element_wise = elementwise
+element_wise_tup = elementwise_tup
 
 streaks = run_length.encode
 parts = chunked
