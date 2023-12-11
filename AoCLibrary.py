@@ -26,6 +26,7 @@ import heapq
 from typing import NamedTuple, Type, List, Set
 from dataclasses import dataclass
 from enum import Enum
+import bisect
 # from numpy import sign
 # get_sign = sign
 # copysign = sign
