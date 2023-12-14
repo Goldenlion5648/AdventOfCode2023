@@ -26,6 +26,8 @@ def get_count(line: str, counts: tuple[int]):
             return 0
         debug("was valid" + '='*30)
         return 1
+    if sum(counts) + len(counts) - 1 > len(line):
+        return 0
     ret = 0
     for i in range(len(line)):
         if line[i] == '.':
