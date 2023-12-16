@@ -27,8 +27,6 @@ def travel(board, start_y, start_x, start_dir):
     seen = {}
     while fringe:
         cur_pos, dir_traveling = fringe.popleft()
-        # show_board(board)
-        # if board[cur_pos]
         if cur_pos not in board:
             continue
         state = cur_pos, dir_traveling
@@ -58,13 +56,9 @@ def travel(board, start_y, start_x, start_dir):
             fringe.extend(get_angle_bounce_result(dir_traveling, Directions.WEST, Directions.NORTH, cur_pos))
             fringe.extend(get_angle_bounce_result(dir_traveling, Directions.NORTH, Directions.WEST, cur_pos))
         elif board[cur_pos] in ['.', '#']:
-            # board[cur_pos] = '#'
             fringe.append(get_next_pos(dir_traveling, cur_pos))
-        # else:
-            # assert False, board[cur_pos]
+
     just_positions = get_just_positions(seen)
-    # show_board({pos: '#' for pos in just_positions})
-    # print(just_positions)
     return len(just_positions)
 
 

@@ -17,8 +17,6 @@ def main(a : str):
 def run_cycles(board, cycles_to_run: int):
     seen = dd(list)
     time_to_load = {}
-    # cycles_to_run = 3
-    mod_offset = None
     repeats_every_n = None
     for c in range(cycles_to_run):
         if c % 100 == 0:
@@ -40,7 +38,6 @@ def run_cycles(board, cycles_to_run: int):
             return time_to_load[((cycles_to_run - loop_start) % repeats_every_n) + loop_start - 1]
 
 
-                
 def roll_north(starting_board):
     board = deepcopy(starting_board)
     for y in range(len(board)):
