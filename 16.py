@@ -19,7 +19,7 @@ def main(a : str):
     for x in range(x_dim):
         best = max(best, travel(board, 0, x, Directions.SOUTH))
         best = max(best, travel(board, y_dim -1, x, Directions.NORTH))
-    return best
+    return travel(board, 0, 0, Directions.EAST), best
         
 
 def travel(board, start_y, start_x, start_dir):
