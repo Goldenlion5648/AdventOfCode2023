@@ -89,6 +89,8 @@ class Directions(Enum):
     SOUTH = (1, 0)
     EAST = (0, 1)
     WEST = (0, -1)
+    LEFT = WEST
+    RIGHT = EAST
     @staticmethod
     def opposite(to_get_opposite_of):
         opposite = {
@@ -100,6 +102,11 @@ class Directions(Enum):
 
         return opposite[to_get_opposite_of]
 
+SIDE_DIRS = (Directions.EAST, Directions.WEST)
+LEFT_RIGHT_DIRS = SIDE_DIRS
+UP_DOWN_DIRS = (Directions.NORTH, Directions.SOUTH)
+TOP_DOWN_DIRS = UP_DOWN_DIRS
+TOP_BOTTOM_DIRS = UP_DOWN_DIRS
 dirs = directions
 dir_rev = {
     (-1, 0): 0, 
@@ -378,6 +385,10 @@ def to_grid(a, as_dict=False):
 read_grid = to_grid
 grid = to_grid
 to_board = to_grid
+
+def board_to_string(board: list[list[str]]):
+    return "\n".join("".join(board[y]) for y in range(len(board)))
+
 def to_dict(a, convert_numbers=True):
     '''converts 2D list to a dict of (y, x) -> value'''
     if isinstance(a, str):
