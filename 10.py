@@ -58,13 +58,18 @@ def main(a : str):
         "J": (1, 0),
         "S": (Directions.NORTH in connections["S"], Directions.SOUTH in connections["S"]),
     }
+    return part1, get_enclosed_area(deepcopy(board), 
+                                len(board_array), len(board_array[0]), seen, vertical_switch_above_below)
+
+
+def get_enclosed_area(board, y_dim, x_dim, border_tiles, vertical_switch_above_below):
     enclosed = 0
-    for y in range(len(board_array)):
+    for y in range(y_dim):
         above_open = False
         below_open = False
-        for x in range(len(board_array[0])):
+        for x in range(x_dim):
             cur = (y, x)
-            if cur in seen:
+            if cur in border_tiles:
                 if board[cur] == '-':
                     continue
                 if board[cur] in vertical_switch_above_below:
@@ -79,8 +84,8 @@ def main(a : str):
                 board[cur] = "$"
             else:
                 board[cur] = "O"
+    return enclosed
 
-    return part1, enclosed
     
 
 

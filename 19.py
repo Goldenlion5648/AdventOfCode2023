@@ -7,9 +7,6 @@ with open("input19.txt") as f:
 class PartBound:
     start: int
     stop: int
-    # def __init__(self, start, stop) -> None:
-    #     self.start = start
-    #     self.stop = stop
 
 def main(a : str):
     a = a.strip()

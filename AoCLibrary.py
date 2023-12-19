@@ -161,6 +161,7 @@ adj4 = adj
 cardinals = adj
 ajd8 = adj8
 all_touching = adj8
+adj4_opposite = {adj4[i] : adj4[(i + 2) % 4] for i in range(len(adj4))}
 
 comb = combinations
 combs = combinations
@@ -390,7 +391,7 @@ def board_to_string(board: list[list[str]]):
     return "\n".join("".join(board[y]) for y in range(len(board)))
 
 def to_dict(a, convert_numbers=True):
-    '''converts 2D list to a dict of (y, x) -> value'''
+    '''converts 2D list or string to a dict of (y, x) -> value'''
     if isinstance(a, str):
         a = a.split("\n")
     return {(y, x) : (int(a[y][x]) if (convert_numbers and a[y][x].isnumeric()) else a[y][x]) for y in range(len(a)) for x in range(len(a[y]))}
